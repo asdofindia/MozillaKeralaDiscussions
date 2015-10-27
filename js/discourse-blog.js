@@ -15,6 +15,12 @@ function discourseBlog () {
             var topics = res;
             var topicNum = topics.topic_list.topics.length;
 
+            function custom_sort(a, b) {
+                return new Date(b["created_at"]).getTime() - new Date(a["created_at"]).getTime();
+            }
+
+            topics["topic_list"]["topics"] = topics["topic_list"]["topics"].sort(custom_sort);
+
             for (var i = 0; i < topicNum; i++) {
                 var topic = topics.topic_list.topics[i];
                 var topicURL = baseURL + '/t/' + topic.slug + '/' + topic.id;
